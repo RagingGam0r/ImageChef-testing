@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ImageChef</title>
+    <!--<link rel="shortcut icon" href="assets/icon.jpg" type="image/x-icon">-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main Script handler -->
+    <script src="assets/js/index.js" type="module"></script>
+
+    <!-- OpenCV -->
+    <!--<script async src="https://docs.opencv.org/4.5.4/opencv.js" type="text/javascript"></script>-->
+    <script async src="assets/js/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+    <script>
+        function onOpenCvReady() {
+            console.log("OpenCV ready");
+        }
+    </script>
+
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+
+    <!-- Base Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-python.min.js"></script>
+
+</head>
+
+<body>
+    <div class="banner">
+        <div class="banner-content">
+            <!--<a href="https://example.com">ImageChef</a>-->
+            <div class="banner-title"><a>ImageChef</a></div>
+            <div class="banner-settings"><a id="settings-abutton">Settings<span class="material-symbols-outlined">settings</span></a></div>
+            <div class="banner-preloaded"><a id="preloaded-abutton">Preloaded<span class="material-symbols-outlined">folder</span></a></div>
+            <div class="banner-section"><input type="submit" id="bake-button" value="Bake"></div>
+        </div>
+    </div>
+    <div id="workspace-wrapper" >
+        <div id="operations">
+            <div class="title">
+                <h1>Operations</h1>
+            </div>
+            <div class="operation-search">
+                <input type="text" id="operation-search-input" placeholder="Search..." autocomplete="off">
+            </div>
+            <div id="operation-list">
+                <div class="category">
+                    <div class="category-title">
+                        <h1>Undefined</h1>
+                    </div>
+                    <div class="category-list" id="categoryUndefined">
+                        <div class="operation">
+                            <div class="operation-title">
+                                <h1>Undefined</h1>
+                            </div>
+                            <div class="operation-description">
+                                <p>Undefined Description.</p>
+                            </div>
+                            <div class="operation-button">
+                                <input type="submit" value="undefined-Mix" class="mix" id="undefined-mix"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="recipes">
+            <div id="title">
+                <h1>Recipe</h1>
+                <button id="clear-button">Clear Recipe<span class="material-symbols-outlined">delete_forever</span></button>
+                <button id="save-button">Save<span class="material-symbols-outlined">save</span></button>
+                <input id="load-input" type="file" accept=".json"/>
+                <label for="load-input" id="load-button">Load<span class="material-symbols-outlined">file_upload</span></label>
+                <button id="codeify-button">Codeify<span class="material-symbols-outlined">code</span></button>
+            </div>
+            <div id="recipe-list">
+                <div class="recipe" id="grayscale" index="0">
+                    <div class="recipe-title">
+                        <h1>GrayScale</h1>
+                        <h5>grayscale_n</h5>
+                    </div>
+                    <div class="recipe-remove">
+                        <button id="grayscale-remove" title="Delete Recipe"><h5></h5><span class="material-symbols-outlined">delete</span></button>
+                    </div>
+                    <div class="recipe-control">
+                        <button class="disable" id="grayscale-disable" title="Disable Recipe"><h5></h5><span class="material-symbols-outlined">block</span></button> <!-- Usually there will only be either disable / enable -->
+                        <button class="disable" id="grayscale-enable" title="Disable Recipe"><h5></h5><span class="material-symbols-outlined">block</span></button> <!-- But For testing here the are both -->
+                        <button class="addbreak" id="grayscale-breakpoint" title="Add Breakpoint"><h5></h5><span class="material-symbols-outlined">add</span></button> <!-- Usually there will only be either add / Remove -->
+                        <button class="removebreak" id="grayscale-breakpoint" title="Remove Breakpoint"><h5></h5><span class="material-symbols-outlined">remove</span></button> <!-- But For testing here the are both -->
+                    </div>
+                    <div class="recipe-arrows">
+                        <button id="grayscale-up" title="Move Recipe Up"><span class="material-symbols-outlined">expand_less</span></button>
+                        <button id="grayscale-down" title="Move Recipe Down"><span class="material-symbols-outlined">expand_more</span></button>
+                    </div>
+                    <div class="recipe-parameters">
+                        <div class="recipe-parameter">
+                            <h5 class="recipe-comment">This is a testing recipe ingredient, you should not see this under any circumstances</h5>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Type</h5>
+                            <select class="recipe-dropdown" arg-name="Colour Space">
+                                <option>GrayScaleV0</option>
+                                <option>GrayScaleV1</option>
+                                <option>GrayScaleV2</option>
+                                <option>GrayScaleV3</option>
+                                <option>GrayScaleV4</option>
+                                <option>GrayScaleV5</option>
+                            </select>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>UnChecked</h5>
+                            <input type="checkbox" class="boolean" arg-name="UnChecked"></input>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Checked</h5>
+                            <input type="checkbox" class="boolean" arg-name="Checked" checked></input>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Base</h5>
+                            <input type="number" class="number" arg-name="Base" value="0"></input>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Bound</h5>
+                            <input type="number" class="boundnumber" arg-name="Bound" min="0" max="255" value="255"></input>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Odd</h5>
+                            <input type="number" class="oddnumber" arg-name="Odd" value="1"></input>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Even</h5>
+                            <input type="number" class="evennumber" arg-name="Even" value="0"></input>
+                        </div>
+                        <!-- Variants of above numbers, but kernel version -->
+                        <div class="recipe-parameter">
+                            <h5>Kernel</h5>
+                            <div class="kernel_LB"><h5>(</h5></div>
+                            <input type="kernelnumber" class="number" arg-name="Kernel_X" value="3"></input>
+                            <div class="kernel_C"><h5>,</h5></div>
+                            <input type="kernelnumber" class="number" arg-name="Kernel_Y" value="3"></input>
+                            <div class="kernel_RB"><h5>)</h5></div>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>KernelBound</h5>
+                            <div class="kernel_LB"><h5>(</h5></div>
+                            <input type="kernelnumber" class="boundnumber" arg-name="Kernel_X" min="0" max="10" value="3"></input>
+                            <div class="kernel_C"><h5>,</h5></div>
+                            <input type="kernelnumber" class="boundnumber" arg-name="Kernel_Y" min="0" max="10" value="3"></input>
+                            <div class="kernel_RB"><h5>)</h5></div>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>KernelOdd</h5>
+                            <div class="kernel_LB"><h5>(</h5></div>
+                            <input type="kernelnumber" class="oddnumber" arg-name="Kernel_X" value="3"></input>
+                            <div class="kernel_C"><h5>,</h5></div>
+                            <input type="kernelnumber" class="oddnumber" arg-name="Kernel_Y" value="3"></input>
+                            <div class="kernel_RB"><h5>)</h5></div>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>KernelEven</h5>
+                            <div class="kernel_LB"><h5>(</h5></div>
+                            <input type="kernelnumber" class="evennumber" arg-name="Kernel_X" value="3"></input>
+                            <div class="kernel_C"><h5>,</h5></div>
+                            <input type="kernelnumber" class="evennumber" arg-name="Kernel_Y" value="3"></input>
+                            <div class="kernel_RB"><h5>)</h5></div>
+                        </div>
+                        <div class="recipe-parameter">
+                            <h5>Scalar</h5>
+                            <div class="scalar_LB"><h5>(</h5></div>
+                            <div class="scalar_I"><h5>R</h5></div>
+                            <input type="scalarnumber" class="number" arg-name="Scalar_R" value="255"></input>
+                            <div class="scalar_C"><h5>,</h5></div>
+                            <div class="scalar_I"><h5>G</h5></div>
+                            <input type="scalarnumber" class="number" arg-name="Scalar_G" value="255"></input>
+                            <div class="scalar_C"><h5>,</h5></div>
+                            <div class="scalar_I"><h5>B</h5></div>
+                            <input type="scalarnumber" class="number" arg-name="Scalar_B" value="255"></input>
+                            <div class="scalar_RB"><h5>)</h5></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+        <div id="IO">
+            <div id="input">
+                <div class="title">
+                    <h1>Input</h1>
+                    <input type="file" id="fileInput" name="file" Value="test">
+                </div>
+                <div id="input-image">
+                    <img class="imageSrc"></img>
+                </div>
+                <!--<canvas id="_RANDOM_CANVAS_MATCH_SIZE_" style="width:100%;height:100%;"></canvas-->
+            </div>
+            <div id="output">
+                <div class="title">
+                    <h1>Output</h1>
+                    <button id="output-save-button">Save Output Image<span class="material-symbols-outlined">save</span></button>
+                </div>
+                <div id="output-image">
+                    <canvas class="canvasOutput" id="canvasOutput" width="1" height="1"></canvas>
+                </div>
+            </div>
+            <div id="console">
+                <div id="console-title">
+                    <h1>Console</h1>
+                </div>
+                <div id="console-content">
+                    <div id="console-log">
+                        <!--
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>
+                        <p class="console-log-bland">...</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="overlay" id="preloaded-overlay" style="display: none;">
+        <div class="overlay-document">
+            <div class="overlay-content">
+                <div class="overlay-header">
+                    <h1>Preloaded</h1>
+                </div>
+                <div class="overlay-body">
+
+                </div>
+                <div class="overlay-footer">
+                    <button type="button" class="overlay-button" id="preloaded-overlay-close">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="settings-overlay" style="display: none;">
+        <div class="overlay-document">
+            <div class="overlay-content">
+                <div class="overlay-header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="overlay-body">
+                    <p style="text-decoration: line-through;text-decoration-color: red;text-decoration-thickness: 3px;">Note: These options will persist between sessions.</p> <!--Currently have not implemented this, as such line-through-->
+                    <div class="settings-option-bool">
+                        <input type="checkbox" class="boolean" id="autobake-boolean" checked><h4>Auto Bake</h4></input>
+                        <h5>Automatically Bakes a new image whenever a value was changed.</h5>
+                    </div>
+                    <!--
+                    <div class="settings-option">
+                        <input type="number" class="number" option="bakeTimeout" value="4000"></input>
+                        <label for="bakeTimeout"><h4>Auto Bake Cutoff Time (MS)</h4></label>
+                        <h5>If it takes longer than this in MS, it cancels auto-bake.</h5>
+                    </div>
+                    -->
+                    
+                    <div class="settings-option">
+                        <select id="codeify-language">
+                            <option value="python" selected>Python</option>
+                            <option value="javascript">JavaScript</option>
+                        </select>
+                        <label for="codeify-language"><h4>Codeify Language</h4></label>
+                        <h5>When "Codeify" is used, it will convert it into the language selected above.</h5>
+                    </div>
+                    <h5 id="codeify-explain">Example Codeify of ${Language}</h5>
+                    <pre style="filter: invert(100%) hue-rotate(180deg) contrast(100%) !important;" id="codeify-container"><code class="language-python" id="codeify-display"></code></pre>
+                </div>
+                <div class="overlay-footer">
+                    <button type="button" class="overlay-button" id="settings-overlay-close">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="codeify-overlay" style="display: none;">
+        <div class="overlay-document">
+            <div class="overlay-content" style="width: 80%; height: 60vh;">
+                <div class="overlay-header">
+                    <h1 id="codeify-title-display">Codeify - ${filename}.py</h1>
+                </div>
+                <div class="overlay-body">
+                    <pre style="filter: invert(100%) hue-rotate(180deg) contrast(100%) !important; height: 100vh; font-size: 0.55vw;" id="codeify-container"><code class="language-python" id="codeify-save-display">
+# Example python code - should not see this
+import cv2
+import numpy as np
+
+def dostuff(img):
+    return cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+base = cv2.imread("test.jpg")
+base = dostuff(base)
+cv2.imshow("Stuff", base)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+                    </code></pre>
+                </div>
+                <div class="overlay-footer" style="margin-top: 0%;">
+                    <button type="button" class="overlay-button" id="codeify-overlay-close">CLOSE</button>
+                    <button type="button" class="overlay-button" id="codeify-overlay-save">SAVE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img id="INPUThiddenImageSourceSuperSecret" style="display:none;"></img> <!-- These are used to peform operastions on. As if it was using "imageSrc" or "canvasOutput" they would be auto resized to the GUI-->
+    <canvas id="OUTPUThiddenImageSourceSuperSecret" style="display:none;"></canvas> <!-- Since these do not do so, they keep there default size (size of input image) and allow for more authentic image processing.-->
+    <!-- Sometimes other canvases are created like "cvtColor_12-hiddencanvas", these are done so if i ever wish to i can modify the save output image to even save breakpoints but i have not got around to figuring out how to do so-->
+</body>
+
+</html>
