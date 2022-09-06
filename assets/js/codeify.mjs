@@ -188,7 +188,7 @@ cv2.destroyAllWindows()
 */
 
 // Language will depend on the user's choice currently only plan to implement python and javascript
-import * as edge from "./edgeCases.mjs";
+import * as edge from "./edgecases.mjs";
 
 class Ingredient {
   constructor(key, name, parameters, breakpoint, disabled) {
