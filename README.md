@@ -17,38 +17,30 @@ There are four main areas of the app:
  3. The **operations** box on the far left where you can select which operation that ImageChef is capable of performing.
  4. The **recipe** area in the middle, where you can drag and drop operations in the order you wish them to be performed, and which arguments they use to perform them.
 
- Some examples of operations are:
-
-- [Convert an image to GrayScale][2]
-
 ## Features
-- Drag and drop
-    - Operations can be dragged in or out of the recipe area to perform them or not.
-    - They can be reoganised by dragging them up or down, allowing for certain operations to be performed before others.
 - Auto Bake
     - Whenever the recipe or input image is modified, ImageChef will automatically "bake" for you and produce the output image.
     - This can be turned off if it is affecting performance. (if image is large, or recipe is complex)
 - Pre-loaded data
     - Images
         - Certain images have been pre-loaded into the app for easy use.
-        - These can be found in the **images** folder in the banner.
+        - These can be found in the pre-loaded banner, and the **images** tab in the overlay.
     - Recipes
         - Recipes can be pre-loaded into the app for easy use, such as grayscale, blur, and so on.
-        - These can be found in the **recipes** folder in the banner.
+        - These can be found in the pre-loaded banner, and the **recipes** tab in the overlay.  
 - Breakpoints
     - Breakpoints allow you to view each step of the recipe as it is being performed.
     - This is useful for debugging and understanding the recipe.
 - Save and Load
     - Images can be easily saved by right clicking the output image and selecting "Save Image".
+    - Or by using the save-button in the output box. (This method retains input size instead of display size, which allows you to save images at lower sizes).
     - Recipes can be easily saved by clicking the "Save Recipe" button. And loaded by clicking the "Load Recipe" button.
-    - You can also copy the URL to easily share recipes.
 - Search
     - If you know the name of an operation, or a word associated with an operation, you can search for it and find it in the operations box to find matching operations.
 - Codeify
-
     - This will convert the opencv recipe into a snippet of code that can be pasted into a language that is supported by codeify.
-        - Python3
-        - JavaScript
+        - Python3 (Fully supported)
+        - JavaScript (Partially supported)
         - TBD
 - Client-Sided
     - ImageChef is entirely client-sided, meaning that no data such as images or recipes is sent to the server - All processing is carried out within your browser on your own machine.
@@ -57,4 +49,3 @@ There are four main areas of the app:
 
 
 [1]: https://example.com/
-[2]: https://example.com/
