@@ -753,7 +753,7 @@ function bakeRecipe() {
 function main(){
     // Setup
     setupOperations();
-    //updateSelected(); // this calls refreshRecipe for us
+    updateSelected(); // this calls refreshRecipe for us
     
 
     // Setup Bake button
