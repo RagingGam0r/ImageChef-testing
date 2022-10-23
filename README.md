@@ -1,5 +1,8 @@
 # ImageChef
 ###### Image chef is inspired / based off of [CyberChef](https://gchq.github.io/CyberChef/).
+###### The code for this is absouletly horrible as it was written over a weekend, with absouletly no knowledge of html / css, and a little bit of JS
+###### If i ever go back to this, i will need to rewrite it.
+
 ImageChef is a simple web app for carrying out image processing tasks within the browser. These can be simple operations such as splitting an image into RGB channels, gray scaling, or more complex operations.
 
 The app is built on top of the [OpenCV](https://opencv.org/) library, and is designed to allow for easy iamge manipulation for non-technical users and technical users without having to blindly test various image processing techniques.
