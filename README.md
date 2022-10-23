@@ -24,7 +24,7 @@ There are four main areas of the app:
 - Auto Bake
     - Whenever the recipe or input image is modified, ImageChef will automatically "bake" for you and produce the output image.
     - This can be turned off if it is affecting performance. (if image is large, or recipe is complex)
-- Pre-loaded data
+- Pre-loaded data (Not implemented yet)
     - Images
         - Certain images have been pre-loaded into the app for easy use.
         - These can be found in the pre-loaded banner, and the **images** tab in the overlay.
